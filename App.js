@@ -2,7 +2,7 @@
 // import { Button, StyleSheet, Text, View, Screen, Spinner, AppRegistry, Image, Switch } from 'react-native';
 
 import React, { Component } from 'react'
-import { View, Text, Switch, StyleSheet, PermissionsAndroid } from 'react-native'
+import { View, Text, Switch, StyleSheet, PermissionsAndroid, Image, Button } from 'react-native'
 
 class SwichExample extends Component {
    state = {
@@ -10,6 +10,11 @@ class SwichExample extends Component {
       lastPosition: 'unknown',
    }
    watchID: ?number = null;
+
+   myPress = () => {
+     console.log('Button was pressed')
+     console.log()
+   };
 
    componentDidMount = () => {
       navigator.geolocation.getCurrentPosition(
@@ -29,25 +34,23 @@ class SwichExample extends Component {
       navigator.geolocation.clearWatch(this.watchID);
    }
    render() {
-      return (
-         <View style = {styles.container}>
-            <Text style = {styles.boldText}>
-               Initial position:
-            </Text>
+     return (
+       <View style={styles.container}>
+         <Text>Welcome to our hack</Text>
+   <Text> </Text>
 
-            <Text>
-               {this.state.initialPosition}
-            </Text>
+   <Image
+             style={{width: 200, height: 200}}
+             source={{uri: 'http://2018.swamphacks.com/public/img/justisland.png'}}
+           />
 
-            <Text style = {styles.boldText}>
-               Current position:
-            </Text>
-
-            <Text>
-               {this.state.lastPosition}
-            </Text>
-         </View>
-      )
+ <Button
+   onPress={this.myPress}
+   title="Show Me The Menu"
+   color="#8F8F29"
+ />
+       </View>
+     )
    }
 }
 export default SwichExample
@@ -56,7 +59,8 @@ const styles = StyleSheet.create ({
    container: {
       flex: 1,
       alignItems: 'center',
-      marginTop: 50
+      justifyContent: 'center',
+      // marginTop: 100
    },
    boldText: {
       fontSize: 35,
