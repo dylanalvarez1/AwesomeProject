@@ -4,9 +4,9 @@ import { Button } from 'react-native';
 
 
 export default class App extends React.Component {
-  
+
 myPress = () => {
-	
+  console.log('You Pressed the Button')
 };
 
  randomHex = () => {
@@ -23,12 +23,12 @@ render() {
       <View style={styles.container}>
         <Text >Welcome to our hack</Text>
 	<Text> </Text>
-       
+
 
 
 <Button
   onPress={this.myPress}
-  title="Find a Store"
+  title="Show Me The Menu"
   color="#841584"
   accessibilityLabel="Learn more about this purple button"
 />
@@ -44,5 +44,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  
+
 });
