@@ -95,9 +95,9 @@ Alert.alert(
   'Restaurants Near You',
   'Select your Current Location',
   [
-    {text: responseData.businesses[0].id, onPress: () => Linking.openURL(responseData.businesses[0].url)},
-    {text: responseData.businesses[1].id, onPress: () => Linking.openURL(responseData.businesses[1].url)},
-    {text: responseData.businesses[2].id, onPress: () => Linking.openURL(responseData.businesses[2].url)},
+    {text: responseData.businesses[0].id.replace(/-/g, " "), onPress: () => Linking.openURL(responseData.businesses[0].url)},
+    {text: responseData.businesses[1].id.replace(/-/g, " "), onPress: () => Linking.openURL(responseData.businesses[1].url)},
+    {text: responseData.businesses[2].id.replace(/-/g, " "), onPress: () => Linking.openURL(responseData.businesses[2].url)},
     {text: 'Cancel' , onPress: () => console.log('Cancelled')},
   ],
   { cancelable: false }
