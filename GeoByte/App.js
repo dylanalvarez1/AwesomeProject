@@ -2,10 +2,10 @@
 // import { Button, StyleSheet, Text, View, Screen, Spinner, AppRegistry, Image, Switch } from 'react-native';
 
 import React, { Component } from 'react'
-import {WebView, Linking, ScrollView } from 'react-native';
+import {WebView, Linking, ScrollView, TouchableOpacity } from 'react-native';
 import { AlertIOS, Alert, View, Text, Switch, StyleSheet, PermissionsAndroid, Image, Button, response, responseData } from 'react-native'
 
-class SwichExample extends Component {
+class SwitchExample extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -119,6 +119,8 @@ Alert.alert(
          { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
       );
       this.watchID = navigator.geolocation.watchPosition((position) => {
+        this.state.latitude = position.coords.latitude
+        this.state.longitude = position.coords.longitude
          const lastPosition = JSON.stringify(position);
          this.setState({ lastPosition });
       });
@@ -128,23 +130,22 @@ Alert.alert(
    }
    render() {
      return (
-       <ScrollView contentContainerStyle={styles.contentContainer}>
+       <View style={styles.container}>
 
 
 
 
    <Image
-             style={{width: 300, height: 300}}
+             style={{width: 350, height: 350}}
              source={{uri: 'https://i.imgur.com/Tsy3trZ.png'}}
            />
-           <Text style = {styles.boldText}>Need a Byte?</Text>
 
- <Button
-   onPress={this._onPressButtonGET.bind(this)}
-   title="Show Me The Menu"
-   color="#8F8F29"
- />
-
+           <TouchableOpacity
+                    style={styles.button}
+                    onPress={this._onPressButtonGET.bind(this)}
+                  >
+                    <Text style = {styles.boldText}> Need a Byte? </Text>
+                  </TouchableOpacity>
 
  <Image
            style={styles.stretch}
@@ -152,32 +153,41 @@ Alert.alert(
          />
 
 
-       </ScrollView>
+       </View>
      )
    }
 }
-export default SwichExample
+export default SwitchExample
 
 const styles = StyleSheet.create ({
-   contentContainer: {
+   container: {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: "#bababa",
-      // marginTop: 100
+      backgroundColor: "#DCE6DC",
+      marginTop: 0,
+
    },
    boldText: {
-      fontSize: 35,
-      color: '#233047',
-      // Add font family later if wanted: fontFamily: 'Times New Roman',
+      fontSize: 25,
+      color: '#3b3b3b',
+      fontFamily: 'Helvetica',
 
    },
    stretch : {
      width:100,
      height:50,
-     marginTop: -15,
+     marginTop: 115,
      resizeMode: 'contain'
 
+   },
+   button: {
+    alignItems: 'center',
+    backgroundColor: '#3c9078',
+    padding: 30,
+    borderRadius: 1000,
+    borderColor: "#3b3b3b",
+    borderWidth: 2
    }
 })
 
