@@ -1,4 +1,4 @@
-# AwesomeProject
+# GeoByte
 Forget searching for that restaurant you're already in to find out if it has terrible ratings, or a desolate menu that you might not enjoy.  This struggle is eliminated with our program GeoByte.
 
 GeoByte pulls your real time location to find out what restaurant/establishment you're currently in, and gives you the ability to go straight to the Yelp page to look at the ratings and/or menu.  This helps the consumer by immediately letting them know whether the new place they've just walked into is a complete dive, or if they should stick around and enjoy what the establishment has to offer.
