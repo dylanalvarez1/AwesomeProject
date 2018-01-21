@@ -2,14 +2,15 @@
 // import { Button, StyleSheet, Text, View, Screen, Spinner, AppRegistry, Image, Switch } from 'react-native';
 
 import React, { Component } from 'react'
-import { AlertIOS, View, Text, Switch, StyleSheet, PermissionsAndroid, Image, Button, response, responseData, WebView } from 'react-native'
+import {WebView, Linking } from 'react-native';
+import { AlertIOS, Alert, View, Text, Switch, StyleSheet, PermissionsAndroid, Image, Button, response, responseData } from 'react-native'
 
 class SwichExample extends Component {
   constructor(props) {
     super(props);
     this.state = {
-       latitude: '29.6436',
-       longitude: '-82.3549',
+       latitude: '29.6235084',
+       longitude: '-82.3767511',
     }
   }
 
@@ -37,7 +38,6 @@ class SwichExample extends Component {
       })
       .done();
 }
-
 */
 /*
 _onPressButtonGET() {
@@ -47,13 +47,11 @@ _onPressButtonGET() {
             'API_KEY': 'eW9jmPoQISmugQHayM0WJhdid_zNWaKB8dmnYywcLdAwufu8eoysWTj8PGhPnmq6drh1qpdG7kCtzOK2fm_WQidIXskWfks74EzDcI-64Q-ni6aYdBBsxFW7K5djWnYx'
           }
         })
-
         .then((response) => response.json())
         .then((responseData) => {
             AlertIOS.alert(
                 "GET Response",
                 //Put latitude and longitude data here (I think its from state)
-
                 "Search Query -> " + responseData.search
             )
               console.log('Response is', responseData)
@@ -62,7 +60,7 @@ _onPressButtonGET() {
     }
 */
 _onPressButtonGET() {
-        fetch(`https://api.yelp.com/v3/businesses/search?latitude=${this.state.latitude}&longitude=${this.state.longitude}`, {
+        fetch(`https://api.yelp.com/v3/businesses/search?latitude=${this.state.latitude}&longitude=${this.state.longitude}&limit=5&radius=500`, {
           method: "GET",
           headers: {
           'Accept': 'application/json',
@@ -73,13 +71,36 @@ _onPressButtonGET() {
 
         .then((response) => response.json())
         .then((responseData) => {
-            AlertIOS.alert(
-                "GET Response",
-                //Put latitude and longitude businessesdata here (I think its from state)
+          let message;
+          let message1;
+          let message2;
+          if(responseData.businesses == undefined)
+          {
+            message = "No matches"
+          }
+          else if(responseData.businesses.length == 0)
+          {
+            message = "No matches"
+          }
+          else {
 
-                "Search Query -> " + responseData.businesses[0].url
-            )
-              console.log('Response is', responseData)
+            for(var i = 0; i < 5; i++) {
+              message += responseData.businesses[i].url
+              //console.log("" + i)
+                //Put latitude and longitude businessesdata here (I think its from state)
+            }
+
+              }
+Alert.alert(
+  'Restaurants Near You',
+  'click below',
+  [
+    {text: responseData.businesses[0].id, onPress: () => Linking.openURL(responseData.businesses[0].url)},
+    {text: responseData.businesses[1].id, onPress: () => Linking.openURL(responseData.businesses[1].url)},
+    {text: responseData.businesses[2].id, onPress: () => Linking.openURL(responseData.businesses[2].url)},
+  ],
+  { cancelable: false }
+)
         })
         .done();
     }
@@ -107,14 +128,15 @@ _onPressButtonGET() {
    render() {
      return (
        <View style={styles.container}>
-         <Text style = {styles.boldText}>Need a Byte?</Text>
-   <Text> </Text>
+
+
 
 
    <Image
-             style={{width: 200, height: 200}}
-             source={{uri: 'http://2018.swamphacks.com/public/img/justisland.png'}}
+             style={{width: 300, height: 300}}
+             source={{uri: 'https://i.imgur.com/Tsy3trZ.png'}}
            />
+           <Text style = {styles.boldText}>Need a Byte?</Text>
 
  <Button
    onPress={this._onPressButtonGET.bind(this)}
@@ -140,12 +162,12 @@ const styles = StyleSheet.create ({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: "#ededed",
+      backgroundColor: "#bababa",
       // marginTop: 100
    },
    boldText: {
       fontSize: 35,
-      color: '#123456',
+      color: '#233047',
       // Add font family later if wanted: fontFamily: 'Times New Roman',
 
    },
@@ -178,7 +200,7 @@ const styles = StyleSheet.create ({
 //     return (
 //       <View style={styles.container}>
 //         <Text>Welcome to our hack</Text>
-// 	<Text> </Text>
+//  <Text> </Text>
 //
 //   <Image
 //             style={{width: 200, height: 200}}
