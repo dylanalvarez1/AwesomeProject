@@ -37,7 +37,6 @@ class SwichExample extends Component {
       })
       .done();
 }
-
 */
 /*
 _onPressButtonGET() {
@@ -47,13 +46,11 @@ _onPressButtonGET() {
             'API_KEY': 'eW9jmPoQISmugQHayM0WJhdid_zNWaKB8dmnYywcLdAwufu8eoysWTj8PGhPnmq6drh1qpdG7kCtzOK2fm_WQidIXskWfks74EzDcI-64Q-ni6aYdBBsxFW7K5djWnYx'
           }
         })
-
         .then((response) => response.json())
         .then((responseData) => {
             AlertIOS.alert(
                 "GET Response",
                 //Put latitude and longitude data here (I think its from state)
-
                 "Search Query -> " + responseData.search
             )
               console.log('Response is', responseData)
@@ -74,6 +71,8 @@ _onPressButtonGET() {
         .then((response) => response.json())
         .then((responseData) => {
           let message;
+          let message1;
+          let message2;
           if(responseData.businesses == undefined)
           {
             message = "No matches"
@@ -85,15 +84,22 @@ _onPressButtonGET() {
           else {
 
             for(var i = 0; i < 5; i++) {
-              message = responseData.businesses[i].url
+              message += responseData.businesses[i].url
               //console.log("" + i)
                 //Put latitude and longitude businessesdata here (I think its from state)
             }
 
               }
-
-          Alert.alert({text: message, onPress: () => console.log("URL Pressed!")})
-          console.log('Response is', responseData)
+Alert.alert(
+  'Restaurants Near You',
+  'click below',
+  [
+    {text: responseData.businesses[0].url, onPress: () => console.log('Ask me later pressed')},
+    {text: responseData.businesses[1].url, onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+    {text: responseData.businesses[2].url, onPress: () => console.log('OK Pressed')},
+  ],
+  { cancelable: false }
+)
         })
         .done();
     }
@@ -121,14 +127,15 @@ _onPressButtonGET() {
    render() {
      return (
        <View style={styles.container}>
-         <Text style = {styles.boldText}>Need a Byte?</Text>
-   <Text> </Text>
+
+
 
 
    <Image
-             style={{width: 200, height: 200}}
-             source={{uri: 'http://2018.swamphacks.com/public/img/justisland.png'}}
+             style={{width: 300, height: 300}}
+             source={{uri: 'https://i.imgur.com/Tsy3trZ.png'}}
            />
+           <Text style = {styles.boldText}>Need a Byte?</Text>
 
  <Button
    onPress={this._onPressButtonGET.bind(this)}
@@ -154,12 +161,12 @@ const styles = StyleSheet.create ({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: "#ededed",
+      backgroundColor: "#bababa",
       // marginTop: 100
    },
    boldText: {
       fontSize: 35,
-      color: '#123456',
+      color: '#233047',
       // Add font family later if wanted: fontFamily: 'Times New Roman',
 
    },
@@ -192,7 +199,7 @@ const styles = StyleSheet.create ({
 //     return (
 //       <View style={styles.container}>
 //         <Text>Welcome to our hack</Text>
-// 	<Text> </Text>
+//  <Text> </Text>
 //
 //   <Image
 //             style={{width: 200, height: 200}}
