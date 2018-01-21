@@ -2,14 +2,14 @@
 // import { Button, StyleSheet, Text, View, Screen, Spinner, AppRegistry, Image, Switch } from 'react-native';
 
 import React, { Component } from 'react'
-import { AlertIOS, View, Text, Switch, StyleSheet, PermissionsAndroid, Image, Button, response, responseData } from 'react-native'
+import { AlertIOS, Alert, View, Text, Switch, StyleSheet, PermissionsAndroid, Image, Button, response, responseData, WebView } from 'react-native'
 
 class SwichExample extends Component {
   constructor(props) {
     super(props);
     this.state = {
-       latitude: '32.434344343',
-       longitude: '12.32434343',
+       latitude: '29.6235084',
+       longitude: '-82.3767511',
     }
   }
 
@@ -39,7 +39,7 @@ class SwichExample extends Component {
 }
 
 */
-
+/*
 _onPressButtonGET() {
         fetch(`https://api.yelp.com/v3/businesses/search?latitude=${this.state.latitude}&longitude=${this.state.longitude}`, {
           method: "GET",
@@ -53,13 +53,50 @@ _onPressButtonGET() {
             AlertIOS.alert(
                 "GET Response",
                 //Put latitude and longitude data here (I think its from state)
-                console.log("Response is", responseData)
+
                 "Search Query -> " + responseData.search
             )
+              console.log('Response is', responseData)
         })
         .done();
     }
+*/
+_onPressButtonGET() {
+        fetch(`https://api.yelp.com/v3/businesses/search?latitude=${this.state.latitude}&longitude=${this.state.longitude}&limit=5&radius=500`, {
+          method: "GET",
+          headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + 'eW9jmPoQISmugQHayM0WJhdid_zNWaKB8dmnYywcLdAwufu8eoysWTj8PGhPnmq6drh1qpdG7kCtzOK2fm_WQidIXskWfks74EzDcI-64Q-ni6aYdBBsxFW7K5djWnYx',
+        },
+      })
 
+        .then((response) => response.json())
+        .then((responseData) => {
+          let message;
+          if(responseData.businesses == undefined)
+          {
+            message = "No matches"
+          }
+          else if(responseData.businesses.length == 0)
+          {
+            message = "No matches"
+          }
+          else {
+
+            for(var i = 0; i < 5; i++) {
+              message = responseData.businesses[i].url
+              //console.log("" + i)
+                //Put latitude and longitude businessesdata here (I think its from state)
+            }
+
+              }
+
+          Alert.alert({text: message, onPress: () => console.log("URL Pressed!")})
+          console.log('Response is', responseData)
+        })
+        .done();
+    }
 
 
 
@@ -86,6 +123,7 @@ _onPressButtonGET() {
        <View style={styles.container}>
          <Text style = {styles.boldText}>Need a Byte?</Text>
    <Text> </Text>
+
 
    <Image
              style={{width: 200, height: 200}}
