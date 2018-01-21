@@ -2,14 +2,14 @@
 // import { Button, StyleSheet, Text, View, Screen, Spinner, AppRegistry, Image, Switch } from 'react-native';
 
 import React, { Component } from 'react'
-import { AlertIOS, View, Text, Switch, StyleSheet, PermissionsAndroid, Image, Button, response, responseData } from 'react-native'
+import { AlertIOS, View, Text, Switch, StyleSheet, PermissionsAndroid, Image, Button, response, responseData, WebView } from 'react-native'
 
 class SwichExample extends Component {
   constructor(props) {
     super(props);
     this.state = {
-       latitude: '40.741895',
-       longitude: '-73.989308',
+       latitude: '29.6436',
+       longitude: '-82.3549',
     }
   }
 
@@ -75,9 +75,9 @@ _onPressButtonGET() {
         .then((responseData) => {
             AlertIOS.alert(
                 "GET Response",
-                //Put latitude and longitude data here (I think its from state)
+                //Put latitude and longitude businessesdata here (I think its from state)
 
-                "Search Query -> " + responseData
+                "Search Query -> " + responseData.businesses[0].url
             )
               console.log('Response is', responseData)
         })
@@ -109,6 +109,7 @@ _onPressButtonGET() {
        <View style={styles.container}>
          <Text style = {styles.boldText}>Need a Byte?</Text>
    <Text> </Text>
+
 
    <Image
              style={{width: 200, height: 200}}
