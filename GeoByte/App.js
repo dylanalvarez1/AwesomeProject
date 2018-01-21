@@ -93,7 +93,7 @@ _onPressButtonGET() {
               }
 Alert.alert(
   'Restaurants Near You',
-  'Select your Current Location',
+  'Select your Restaurant',
   [
     {text: responseData.businesses[0].id.replace(/-/g, " ").toLowerCase().replace(/\b[a-z](?=[a-z]{2})/g, function(letter) {
     return letter.toUpperCase(); } ), onPress: () => Linking.openURL(responseData.businesses[0].url)},
