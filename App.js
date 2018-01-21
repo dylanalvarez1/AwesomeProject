@@ -2,7 +2,7 @@
 // import { Button, StyleSheet, Text, View, Screen, Spinner, AppRegistry, Image, Switch } from 'react-native';
 
 import React, { Component } from 'react'
-import {WebView, Linking } from 'react-native';
+import {WebView, Linking, ScrollView } from 'react-native';
 import { AlertIOS, Alert, View, Text, Switch, StyleSheet, PermissionsAndroid, Image, Button, response, responseData } from 'react-native'
 
 class SwichExample extends Component {
@@ -93,11 +93,12 @@ _onPressButtonGET() {
               }
 Alert.alert(
   'Restaurants Near You',
-  'click below',
+  'Select your Current Location',
   [
     {text: responseData.businesses[0].id, onPress: () => Linking.openURL(responseData.businesses[0].url)},
     {text: responseData.businesses[1].id, onPress: () => Linking.openURL(responseData.businesses[1].url)},
     {text: responseData.businesses[2].id, onPress: () => Linking.openURL(responseData.businesses[2].url)},
+    {text: 'Cancel' , onPress: () => console.log('Cancelled')},
   ],
   { cancelable: false }
 )
@@ -127,7 +128,7 @@ Alert.alert(
    }
    render() {
      return (
-       <View style={styles.container}>
+       <ScrollView contentContainerStyle={styles.contentContainer}>
 
 
 
@@ -151,14 +152,14 @@ Alert.alert(
          />
 
 
-       </View>
+       </ScrollView>
      )
    }
 }
 export default SwichExample
 
 const styles = StyleSheet.create ({
-   container: {
+   contentContainer: {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
