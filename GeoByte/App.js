@@ -96,11 +96,11 @@ Alert.alert(
   'Select your Restaurant',
   [
     {text: responseData.businesses[0].id.replace(/-/g, " ").toLowerCase().replace(/\b[a-z](?=[a-z]{2})/g, function(letter) {
-    return letter.toUpperCase(); } ), onPress: () => Linking.openURL(responseData.businesses[0].url)},
+    return letter.toUpperCase(); } ).replace("Gainesville", ""), onPress: () => Linking.openURL(responseData.businesses[0].url)},
     {text: responseData.businesses[1].id.replace(/-/g, " ").toLowerCase().replace(/\b[a-z](?=[a-z]{2})/g, function(letter) {
-    return letter.toUpperCase(); } ), onPress: () => Linking.openURL(responseData.businesses[1].url)},
+    return letter.toUpperCase(); } ).replace("Gainesville", ""), onPress: () => Linking.openURL(responseData.businesses[1].url)},
     {text: responseData.businesses[2].id.replace(/-/g, " ").toLowerCase().replace(/\b[a-z](?=[a-z]{2})/g, function(letter) {
-    return letter.toUpperCase(); } ), onPress: () => Linking.openURL(responseData.businesses[2].url)},
+    return letter.toUpperCase(); } ).replace("Gainesville", ""), onPress: () => Linking.openURL(responseData.businesses[2].url)},
     {text: 'Cancel' , onPress: () => console.log('Cancelled')},
   ],
   { cancelable: false }
